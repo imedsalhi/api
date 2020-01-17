@@ -4,7 +4,7 @@
     <title>activite</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/musique.css">
 </head>
 
 <body>
@@ -32,10 +32,10 @@
         </div>
     </nav>
     <div id="t-b">
-        <p id="titre"> LES ACTIVITES </p>
-        <button type="button" id="ajouter" class="btn btn-success">ajouter</button>
+        <p> musique </p>
+        <button type="button" id="ajouter" class="btn btn-success" onclick="a()">ajouter</button>
     </div>
-    <div class="input-group mb-3">
+    <!-- <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text" for="inputGroupSelect01">tri par </label>
         </div>
@@ -45,17 +45,17 @@
           <option value="access">accessibilite</option>
           <option value="nb_participant">nombre des participants</option>
         </select>
-    </div>
+    </div> -->
     <table class="table">
         <thead class="thead-light">
             <tr>
-                <th scope="col">activite</th>
-                <th scope="col">type</th>
+                <th scope="col">Titre</th>
+                <th scope="col">artiste</th>
                 <th scope="col">action</th>
 
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
         </tbody>
     </table>
     <div class="container-fluid">
@@ -84,74 +84,77 @@
                             <input type="text" class="form-control" id="id">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Nom</label>
-                            <input type="text" class="form-control" id="nom">
+                            <label for="formGroupExampleInput">Titre</label>
+                            <input type="text" class="form-control" id="titre">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Type</label>
-                            <input type="text" class="form-control" id="type">
+                            <label for="formGroupExampleInput2">genre</label>
+                            <input type="text" class="form-control" id="genre">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Accessibilite</label>
-                            <input type="text" class="form-control" id="access">
+                            <label for="formGroupExampleInput2">Artiste</label>
+                            <input type="text" class="form-control" id="artiste">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Nombre des participants</label>
-                            <input type="text" class="form-control" id="nbr">
+                            <label for="formGroupExampleInput2">Date</label>
+                            <input type="text" class="form-control" id="date">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Prix</label>
-                            <input type="text" class="form-control" id="prix">
+                            <label for="formGroupExampleInput2">temps</label>
+                            <input type="text" class="form-control" id="temps">
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                    <button id="supprimer" type="button" class="btn btn-danger">supprimer</button>
-                    <button id="modifier" type="button" class="btn btn-primary">modifier</button>
+                    <button id="supprimer" type="button" class="btn btn-danger" onclick="supprime();">supprimer</button>
+                    <button id="modifier" type="button" class="btn btn-primary" onclick="miseajour()">modifier</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalaj" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalScrollable2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">rempli des champs pour ajouter uen activite</h5>
-                    <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">ajouter un son</h5>
+                    <button type="button" class="close" id="close2" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
                 </div>
                 <div class="modal-body" id="mf">
                     <form>
-
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Nom</label>
-                            <input type="text" class="form-control" id="mnom">
+                            <label for="formGroupExampleInput">id</label>
+                            <input type="text" class="form-control" id="ida">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Type</label>
-                            <input type="text" class="form-control" id="mtype">
+                            <label for="formGroupExampleInput">Titre</label>
+                            <input type="text" class="form-control" id="titrea">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Accessibilite</label>
-                            <input type="text" class="form-control" id="maccess">
+                            <label for="formGroupExampleInput2">genre</label>
+                            <input type="text" class="form-control" id="genrea">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Nombre des participants</label>
-                            <input type="text" class="form-control" id="mnbr">
+                            <label for="formGroupExampleInput2">Artiste</label>
+                            <input type="text" class="form-control" id="artistea">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Prix</label>
-                            <input type="text" class="form-control" id="mprix">
+                            <label for="formGroupExampleInput2">Date</label>
+                            <input type="text" class="form-control" id="datea">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">temps</label>
+                            <input type="text" class="form-control" id="tempsa">
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                    <button id="save" type="button" class="btn btn-danger">ajouter</button>
+                    <button id="modifier" type="button" class="btn btn-primary" onclick="ajouter()">modifier</button>
                 </div>
             </div>
         </div>
@@ -160,7 +163,7 @@
     <script src="../lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="../js/index.js"></script>
+    <script src="../js/musique.js"></script>
 </body>
 
 </html>

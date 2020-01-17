@@ -1,3 +1,4 @@
+//depends on choice we send a get request to db to order activities 
 function afficher(choix) {
     switch (choix) {
         case "all":
@@ -18,7 +19,7 @@ function afficher(choix) {
     }
 
 }
-
+// get data to show from db 
 function welcome(adresse) {
 
 
@@ -33,15 +34,16 @@ function welcome(adresse) {
         dataType: "json"
     })
 }
-welcome("http://jihane.fr/dwmg2/api/activite/index.php?action=display&type=all");
-
+welcome("http://jihane.fr/dwmg2/api/activite/index.php?action=display&type=all"); // first call when open index
+//to show list of activities on home page
 function charger(data) {
 
 
     data.forEach(element => {
+            console.log(element);
             var l = $("<tr></tr>");
-            var nom = $("<td></td>").text(element[5]);
-            var type = $("<td></td>").text(element[1]);
+            var nom = $("<td></td>").text(element["nom"]);
+            var type = $("<td></td>").text(element["type"]);
             var bouton = $("<button></button>").text("afficher");
             bouton.addClass("btn btn-success");
             bouton.click(function() {
@@ -62,20 +64,21 @@ function charger(data) {
 
 }
 $('#myModal').on('shown.bs.modal', function() {
-    $('#myInput').trigger('focus')
-})
-
+        $('#myInput').trigger('focus')
+    })
+    // show activity details in modal each time it is called
 function modal_affiche(donnee) {
-    $("#id").val(donnee[0]);
-    $("#nom").val(donnee[5]);
-    $('#type').val(donnee[1]);
-    $('#access').val(donnee[4]);
-    $('#nbr').val(donnee[2]);
-    $('#prix').val(donnee[3]);
+
+    $("#id").val(donnee["id"]);
+    $("#nom").val(donnee["nom"]);
+    $('#type').val(donnee["type"]);
+    $('#access').val(donnee["accessibilite"]);
+    $('#nbr').val(donnee["nb_participants"]);
+    $('#prix').val(donnee["prix"]);
 
 
 }
-
+// event on delete button
 $("#supprimer").on("click", function() {
 
     var rl = "http://jihane.fr/dwmg2/api/activite/index.php?action=delete&id=" + $("#id").val();
@@ -93,6 +96,7 @@ $("#supprimer").on("click", function() {
     })
 
 });
+//events on buttons
 $("#modifier").on("click", function() {
 
     modifier();
@@ -101,25 +105,25 @@ $("#ajouter").on("click", function() {
 
     ajouter();
 });
-
+// modify an activity
 function modifier() {
     var rl = "http://jihane.fr/dwmg2/api/activite/index.php?action=update&type=" + $("#type").val() + "&nb_participants=" + $("#nbr").val() + "&prix=" + $("#prix").val() + "&accessibilite=" + $("#access").val() + "&nom=" + $("#nom").val() + "&id=" + $("#id").val();
 
     $.ajax({
-            url: rl,
-            data: {
+        url: rl,
+        data: {
 
-            },
-            success: function(data) {
-                var ms = $("<p></p>").text(data);
-                ms.css("color", "red");
-                $("#exampleModalScrollableTitle").append(ms);
-            },
-            dataType: "json"
-        })
-        // document.location.reload(true);
+        },
+        success: function(data) {
+            var ms = $("<p></p>").text(data);
+            ms.css("color", "red");
+            $("#exampleModalScrollableTitle").append(ms);
+        },
+        dataType: "json"
+    })
+
 }
-
+// add activity to the db
 function ajouter() {
     $("#modalaj").modal("show");
     $("#save").on("click", function() {
@@ -141,7 +145,9 @@ function ajouter() {
 
             },
             success: function(data) {
-                alert(data);
+
+                $("#modalaj").modal("hide");
+                welcome("http://jihane.fr/dwmg2/api/activite/index.php?action=display&type=all");
             },
             method: 'POST',
             dataType: "json"
@@ -150,10 +156,12 @@ function ajouter() {
 
 
 }
+// select the value of scroll list to order
 $(document).ready(function() {
     $("select").change(function() {
         var choix = $(this).children("option:selected").val();
         afficher(choix);
+
 
     });
 
